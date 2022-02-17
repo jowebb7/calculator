@@ -3,7 +3,7 @@
   padding: 0;
   color: black;
   text-align: center;
-  font-size: 10vh;
+  font-size: 7vw;
 }
 
 html body {
@@ -21,17 +21,19 @@ html body {
   margin: auto;
   margin-top: 15vh;
   justify-content: space-evenly;
+  background-color: black;
 }
 
 .display {
   height: 20vh;
-  width: 100%;
+  width: 99%;
   border: 2px solid black;
   border-radius: 4px;
   background-color: lightgray;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
+  justify-self: center;
 }
 
 .rowContainer {
@@ -39,7 +41,7 @@ html body {
   justify-content: space-evenly;
 }
 .rowContainer * {
-  font-size: 5vh;
+  font-size: 3vw;
 }
 .clear {
   background-color: orange;
