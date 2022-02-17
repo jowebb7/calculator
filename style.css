@@ -1,0 +1,76 @@
+* {
+  margin: 0;
+  padding: 0;
+  color: black;
+  text-align: center;
+  font-size: 10vh;
+}
+
+html body {
+  width: 100%;
+  height: 100%;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  height: 70vh;
+  width: 30vw;
+  border: 4px solid black;
+  border-radius: 4px;
+  margin: auto;
+  margin-top: 15vh;
+  justify-content: space-evenly;
+}
+
+.display {
+  height: 20vh;
+  width: 100%;
+  border: 2px solid black;
+  border-radius: 4px;
+  background-color: lightgray;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.rowContainer {
+  display: flex;
+  justify-content: space-evenly;
+}
+.rowContainer * {
+  font-size: 5vh;
+}
+.clear {
+  background-color: orange;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.numberButton {
+  background-color: grey;
+}
+
+.functionButton {
+  background-color: yellow;
+}
+
+.btn {
+  border: 2px solid black;
+  border-radius: 8px;
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.halfButton {
+  border: 2px solid black;
+  border-radius: 8px;
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
