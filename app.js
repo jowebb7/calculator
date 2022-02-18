@@ -1,78 +1,178 @@
-const one = document.querySelector(".one");
-const two = document.querySelector(".two");
-const three = document.querySelector(".three");
-const four = document.querySelector(".four");
-const five = document.querySelector(".five");
-const six = document.querySelector(".six");
-const seven = document.querySelector(".seven");
-const eight = document.querySelector(".eight");
-const nine = document.querySelector(".nine");
-const zero = document.querySelector(".zero");
 const display = document.querySelector(".display");
 const numberButton = document.querySelectorAll(".numberButton");
 const functionButton = document.querySelectorAll(".functionButton");
 const clear = document.querySelector(".clear");
 
 let operatorLogic = true;
-let memory = 0;
-let memoryTwo = 0;
-let memoryThree = 0;
+let operatorLogicTwo = true;
+let memory = "";
+let memoryTwo = "";
+let operatorFunctionTwo = "";
 let operatorFunction = "";
 
-function updateDisplay(e) {
-  display.innerHTML = this.innerHTML;
-}
+// Setting the "memory" and display for the numbers clicked. It will concat the strings as you click them
+// and display the strings.
 function setMemoryButton(e) {
+  // If we have not clicked a function, we will fill the first memory and display it
   if (operatorLogic === true) {
-    memory = parseInt(this.innerHTML);
+    memory = memory + this.innerHTML;
+    display.innerHTML = parseFloat(memory);
+    // If we have clicked a function after two other functions have been clicked
+    // we will run the math
+  } else if (operatorLogic === false && operatorLogicTwo === false) {
+    memoryTwo = memoryTwo + this.innerHTML;
+    display.innerHTML = memoryTwo;
+    // If we have clicked a function, we will fill the second memory and display it
   } else {
-    memoryTwo = parseInt(this.innerHTML);
-    operate();
+    memoryTwo = memoryTwo + this.innerHTML;
+    display.innerHTML = memoryTwo;
   }
 }
-
+//Clears everything
 function reset() {
-  memory = 0;
-  memoryTwo = 0;
-  display.innerHTML = memory;
+  memory = "";
+  memoryTwo = "";
+  display.innerHTML = "0";
   operatorLogic = true;
+  operatorLogicTwo = true;
+  operatorFunctionTwo = "";
+  operatorFunction = "";
 }
+
 function mathButton(e) {
-  operatorLogic = false;
-  operatorFunction = this.innerHTML;
+  // we storing that a function has been clicked
+  // if we have clicked a function before this, then store the clicked function and run the operate logic
+  if (operatorLogic === false) {
+    operatorFunctionTwo = this.innerHTML;
+    operate();
+    // if we have not clicked a function before this, we will simply store the clicked function
+  } else {
+    operatorLogic = false;
+    operatorFunction = this.innerHTML;
+  }
 }
 
 function operate() {
-  switch (operatorFunction) {
-    case "+":
-      memory = memory + memoryTwo;
-      console.log(memory, memoryTwo);
-      display.innerHTML = memory;
-      break;
-    case "-":
-      memory = memory - memoryTwo;
-      console.log(memory, memoryTwo);
-      display.innerHTML = memory;
-      break;
-    case "*":
-      memory = memory * memoryTwo;
-      console.log(memory, memoryTwo);
-      display.innerHTML = memory;
-      break;
-    case "/":
-      memory = memory / memoryTwo;
-      console.log(memory, memoryTwo);
-      display.innerHTML = memory;
-      break;
-    case "%":
-      memory = memory % memoryTwo;
-      console.log(memory, memoryTwo);
-      display.innerHTML = memory;
-      break;
+  console.log(
+    memory,
+    memoryTwo,
+    operatorFunction,
+    operatorFunctionTwo,
+    operatorLogic,
+    operatorLogicTwo
+  );
+  // if our second stored function is a '=' then we will run the first switch which will
+  // do the math based on the first stored function, display the answer, then clear everything
+  // but the displayed info
+  if (operatorFunctionTwo === "=") {
+    switch (operatorFunction) {
+      case "+":
+        memory = parseFloat(memory) + parseFloat(memoryTwo);
+        console.log(memory, memoryTwo);
+        display.innerHTML = parseFloat(memory);
+        break;
+      case "-":
+        memory = parseFloat(memory) - parseFloat(memoryTwo);
+        console.log(memory, memoryTwo);
+        display.innerHTML = parseFloat(memory);
+        break;
+      case "*":
+        memory = parseFloat(memory) * parseFloat(memoryTwo);
+        console.log(memory, memoryTwo);
+        display.innerHTML = parseFloat(memory);
+        break;
+      case "/":
+        memory = parseFloat(memory) / parseFloat(memoryTwo);
+        console.log(memory, memoryTwo);
+        display.innerHTML = parseFloat(memory);
+        break;
+      case "=":
+        memory = parseFloat(memory) / parseFloat(memoryTwo);
+        console.log(memory, memoryTwo);
+        display.innerHTML = parseFloat(memory);
+        break;
+    }
+    display.innerHTML = parseFloat(memory);
+    memoryTwo = 0;
+    operatorLogic = true;
+    operatorLogicTwo = true;
+    operatorFunctionTwo = "";
+    operatorFunction = "";
+  } else if (operatorLogic === false && operatorLogicTwo === false) {
+    console.log("we are in chaining territory");
+    switch (operatorFunctionTwo) {
+      case "+":
+        memory = parseFloat(memory) + parseFloat(memoryTwo);
+        console.log(memory, memoryTwo);
+        display.innerHTML = memory;
+        memoryTwo = "0";
+        break;
+      case "-":
+        memory = parseFloat(memory) - parseFloat(memoryTwo);
+        console.log(memory, memoryTwo);
+        display.innerHTML = memory;
+        memoryTwo = "0";
+        break;
+      case "*":
+        memory = parseFloat(memory) * parseFloat(memoryTwo);
+        console.log(memory, memoryTwo);
+        display.innerHTML = memory;
+        memoryTwo = "0";
+        break;
+      case "/":
+        memory = parseFloat(memory) / parseFloat(memoryTwo);
+        console.log(memory, memoryTwo);
+        display.innerHTML = memory;
+        memoryTwo = "0";
+        break;
+      case "=":
+        memory = parseFloat(memory) / parseFloat(memoryTwo);
+        console.log(memory, memoryTwo);
+        display.innerHTML = parseFloat(memory);
+        memoryTwo = "0";
+        break;
+    }
+
+    // if the second stored function is not an "=", then we will do the math but keep
+    // all the info stored
+  } else {
+    operatorLogicTwo = false;
+    console.log("this is our first function", operatorLogicTwo);
+    switch (operatorFunction) {
+      case "+":
+        memory = parseFloat(memory) + parseFloat(memoryTwo);
+        console.log(memory, memoryTwo);
+        display.innerHTML = parseFloat(memory);
+        memoryTwo = "0";
+        break;
+      case "-":
+        memory = parseFloat(memory) - parseFloat(memoryTwo);
+        console.log(memory, memoryTwo);
+        display.innerHTML = parseFloat(memory);
+        memoryTwo = "0";
+        break;
+      case "*":
+        memory = parseFloat(memory) * parseFloat(memoryTwo);
+        console.log(memory, memoryTwo);
+        display.innerHTML = parseFloat(memory);
+        memoryTwo = "0";
+        break;
+      case "/":
+        memory = parseFloat(memory) / parseFloat(memoryTwo);
+        console.log(memory, memoryTwo);
+        display.innerHTML = parseFloat(memory);
+        memoryTwo = "0";
+        break;
+      case "=":
+        memory = parseFloat(memory) / parseFloat(memoryTwo);
+        console.log(memory, memoryTwo);
+        display.innerHTML = parseFloat(memory);
+        memoryTwo = "0";
+        break;
+    }
   }
 }
 
-numberButton.forEach((btn) => btn.addEventListener("click", updateDisplay));
 numberButton.forEach((btn) => btn.addEventListener("click", setMemoryButton));
 functionButton.forEach((btn) => btn.addEventListener("click", mathButton));
 clear.addEventListener("click", reset);

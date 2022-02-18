@@ -76,3 +76,42 @@ html body {
   align-items: center;
   justify-content: center;
 }
+
+.cbtn {
+  border: 2px solid black;
+  border-radius: 8px;
+  height: 10vh;
+  width: 78%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mbtn {
+  border: 2px solid black;
+  border-radius: 8px;
+  height: 10vh;
+  width: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.zero {
+  border: 2px solid black;
+  border-radius: 8px;
+  height: 10vh;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bbtn {
+  border: 2px solid black;
+  border-radius: 8px;
+  height: 10vh;
+  width: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
