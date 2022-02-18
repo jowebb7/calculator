@@ -9,23 +9,41 @@ let memory = "";
 let memoryTwo = "";
 let operatorFunctionTwo = "";
 let operatorFunction = "";
+let equalsCheck = false;
 
 // Setting the "memory" and display for the numbers clicked. It will concat the strings as you click them
 // and display the strings.
 function setMemoryButton(e) {
   // If we have not clicked a function, we will fill the first memory and display it
-  if (operatorLogic === true) {
-    memory = memory + this.innerHTML;
-    display.innerHTML = parseFloat(memory);
-    // If we have clicked a function after two other functions have been clicked
-    // we will run the math
-  } else if (operatorLogic === false && operatorLogicTwo === false) {
-    memoryTwo = memoryTwo + this.innerHTML;
-    display.innerHTML = memoryTwo;
-    // If we have clicked a function, we will fill the second memory and display it
+  if (equalsCheck === true) {
+    if (operatorLogic === true) {
+      equalsCheck = false;
+      memory = this.innerHTML;
+      display.innerHTML = Math.round(parseFloat(memory) * 100) / 100;
+      // If we have clicked a function after two other functions have been clicked
+      // we will run the math
+    } else if (operatorLogic === false && operatorLogicTwo === false) {
+      memoryTwo = memoryTwo + this.innerHTML;
+      display.innerHTML = Math.round(parseFloat(memoryTwo) * 100) / 100;
+      // If we have clicked a function, we will fill the second memory and display it
+    } else {
+      memoryTwo = memoryTwo + this.innerHTML;
+      display.innerHTML = Math.round(parseFloat(memoryTwo) * 100) / 100;
+    }
   } else {
-    memoryTwo = memoryTwo + this.innerHTML;
-    display.innerHTML = memoryTwo;
+    if (operatorLogic === true) {
+      memory = memory + this.innerHTML;
+      display.innerHTML = Math.round(parseFloat(memory) * 100) / 100;
+      // If we have clicked a function after two other functions have been clicked
+      // we will run the math
+    } else if (operatorLogic === false && operatorLogicTwo === false) {
+      memoryTwo = memoryTwo + this.innerHTML;
+      display.innerHTML = Math.round(parseFloat(memoryTwo) * 100) / 100;
+      // If we have clicked a function, we will fill the second memory and display it
+    } else {
+      memoryTwo = memoryTwo + this.innerHTML;
+      display.innerHTML = Math.round(parseFloat(memoryTwo) * 100) / 100;
+    }
   }
 }
 //Clears everything
@@ -42,7 +60,12 @@ function reset() {
 function mathButton(e) {
   // we storing that a function has been clicked
   // if we have clicked a function before this, then store the clicked function and run the operate logic
-  if (operatorLogic === false) {
+  if (operatorLogic === false && operatorLogicTwo === false) {
+    operatorFunction = operatorFunctionTwo;
+    console.log("Flag", operatorFunction, operatorFunctionTwo);
+    operatorFunctionTwo = this.innerHTML;
+    operate();
+  } else if (operatorLogic === false) {
     operatorFunctionTwo = this.innerHTML;
     operate();
     // if we have not clicked a function before this, we will simply store the clicked function
@@ -69,66 +92,67 @@ function operate() {
       case "+":
         memory = parseFloat(memory) + parseFloat(memoryTwo);
         console.log(memory, memoryTwo);
-        display.innerHTML = parseFloat(memory);
+        display.innerHTML = Math.round(parseFloat(memory) * 100) / 100;
         break;
       case "-":
         memory = parseFloat(memory) - parseFloat(memoryTwo);
         console.log(memory, memoryTwo);
-        display.innerHTML = parseFloat(memory);
+        display.innerHTML = Math.round(parseFloat(memory) * 100) / 100;
         break;
       case "*":
         memory = parseFloat(memory) * parseFloat(memoryTwo);
         console.log(memory, memoryTwo);
-        display.innerHTML = parseFloat(memory);
+        display.innerHTML = Math.round(parseFloat(memory) * 100) / 100;
         break;
       case "/":
         memory = parseFloat(memory) / parseFloat(memoryTwo);
         console.log(memory, memoryTwo);
-        display.innerHTML = parseFloat(memory);
+        display.innerHTML = Math.round(parseFloat(memory) * 100) / 100;
         break;
       case "=":
         memory = parseFloat(memory) / parseFloat(memoryTwo);
         console.log(memory, memoryTwo);
-        display.innerHTML = parseFloat(memory);
+        display.innerHTML = Math.round(parseFloat(memory) * 100) / 100;
         break;
     }
-    display.innerHTML = parseFloat(memory);
+    display.innerHTML = Math.round(parseFloat(memory) * 100) / 100;
     memoryTwo = 0;
     operatorLogic = true;
     operatorLogicTwo = true;
     operatorFunctionTwo = "";
     operatorFunction = "";
+    equalsCheck = true;
   } else if (operatorLogic === false && operatorLogicTwo === false) {
-    console.log("we are in chaining territory");
-    switch (operatorFunctionTwo) {
+    console.log(
+      "we are in chaining territory",
+      memory,
+      memoryTwo,
+      operatorFunction,
+      operatorFunctionTwo
+    );
+    switch (operatorFunction) {
       case "+":
         memory = parseFloat(memory) + parseFloat(memoryTwo);
         console.log(memory, memoryTwo);
-        display.innerHTML = memory;
+        display.innerHTML = Math.round(parseFloat(memory) * 100) / 100;
         memoryTwo = "0";
         break;
       case "-":
         memory = parseFloat(memory) - parseFloat(memoryTwo);
         console.log(memory, memoryTwo);
-        display.innerHTML = memory;
+        display.innerHTML = Math.round(parseFloat(memory) * 100) / 100;
         memoryTwo = "0";
         break;
       case "*":
         memory = parseFloat(memory) * parseFloat(memoryTwo);
         console.log(memory, memoryTwo);
-        display.innerHTML = memory;
+        display.innerHTML = Math.round(parseFloat(memory) * 100) / 100;
         memoryTwo = "0";
         break;
       case "/":
         memory = parseFloat(memory) / parseFloat(memoryTwo);
         console.log(memory, memoryTwo);
-        display.innerHTML = memory;
-        memoryTwo = "0";
-        break;
-      case "=":
-        memory = parseFloat(memory) / parseFloat(memoryTwo);
-        console.log(memory, memoryTwo);
-        display.innerHTML = parseFloat(memory);
+        display.innerHTML = Math.round(parseFloat(memory) * 100) / 100;
         memoryTwo = "0";
         break;
     }
@@ -142,31 +166,25 @@ function operate() {
       case "+":
         memory = parseFloat(memory) + parseFloat(memoryTwo);
         console.log(memory, memoryTwo);
-        display.innerHTML = parseFloat(memory);
+        display.innerHTML = (Math.round(parseFloat(memory)) / 1000) * 1000;
         memoryTwo = "0";
         break;
       case "-":
         memory = parseFloat(memory) - parseFloat(memoryTwo);
         console.log(memory, memoryTwo);
-        display.innerHTML = parseFloat(memory);
+        display.innerHTML = (Math.round(parseFloat(memory)) / 1000) * 1000;
         memoryTwo = "0";
         break;
       case "*":
         memory = parseFloat(memory) * parseFloat(memoryTwo);
         console.log(memory, memoryTwo);
-        display.innerHTML = parseFloat(memory);
+        display.innerHTML = (Math.round(parseFloat(memory)) / 1000) * 1000;
         memoryTwo = "0";
         break;
       case "/":
         memory = parseFloat(memory) / parseFloat(memoryTwo);
         console.log(memory, memoryTwo);
-        display.innerHTML = parseFloat(memory);
-        memoryTwo = "0";
-        break;
-      case "=":
-        memory = parseFloat(memory) / parseFloat(memoryTwo);
-        console.log(memory, memoryTwo);
-        display.innerHTML = parseFloat(memory);
+        display.innerHTML = Math.round(parseFloat(memory) * 100) / 100;
         memoryTwo = "0";
         break;
     }
